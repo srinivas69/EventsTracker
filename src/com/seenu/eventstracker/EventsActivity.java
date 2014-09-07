@@ -5,83 +5,118 @@ import com.seenu.eventstracker.fragments.MyEventsFragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBar.Tab;
 import android.support.v7.app.ActionBarActivity;
 import android.widget.Toast;
 
-public class EventsActivity extends ActionBarActivity {
+public class EventsActivity extends ActionBarActivity implements
+		ActionBar.TabListener {
 
-	// Fragments for the tabs
-	private Fragment allEventsFrag;
-	private Fragment myEventsFrag;
+	private ViewPager viewPager;
+	private TabsPagerAdapter mAdapter;
+	private ActionBar actionBar;
+
+	// Tab titles
+	private String[] tabs = { "All", "My Events" };
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.events_activity);
 
-		allEventsFrag = new AllEventsFragment();
-		myEventsFrag = new MyEventsFragment();
+		// Initilization
+		viewPager = (ViewPager) findViewById(R.id.pager);
+		actionBar = getSupportActionBar();
+		mAdapter = new TabsPagerAdapter(getSupportFragmentManager());
 
-		// instance of the Actionbar
-		ActionBar aBar = getSupportActionBar();
-		aBar.setTitle("Events");
+		viewPager.setAdapter(mAdapter);
+		actionBar.setHomeButtonEnabled(false);
+		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
-		// setting tab navigation for the Actionbar
-		aBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+		// Adding Tabs
+		for (String tab_name : tabs) {
+			actionBar.addTab(actionBar.newTab().setText(tab_name)
+					.setTabListener(this));
+		}
 
-		ActionBar.Tab allEventsTab = aBar.newTab().setText("All");
-		ActionBar.Tab myEventsTab = aBar.newTab().setText("My Events");
-
-		allEventsTab.setTabListener(new TabListener(allEventsFrag));
-		myEventsTab.setTabListener(new TabListener(myEventsFrag));
-
-		aBar.addTab(allEventsTab);
-		aBar.addTab(myEventsTab);
-
-		// Bundle for receiving the data from the previous activity
 		Bundle b = getIntent().getExtras();
 		String name = b.getString("NAME");
 
-		// Welcome Toast message after the launch of this activity
-		Toast.makeText(EventsActivity.this, "Welcome! " + name,
+		Toast.makeText(EventsActivity.this, "Welcome!" + name,
 				Toast.LENGTH_SHORT).show();
+
+		// on swiping the viewpager make respective tab selected
+		viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+
+			@Override
+			public void onPageSelected(int position) {
+				// on changing the page
+				// make respected tab selected
+				actionBar.setSelectedNavigationItem(position);
+			}
+
+			@Override
+			public void onPageScrolled(int arg0, float arg1, int arg2) {
+			}
+
+			@Override
+			public void onPageScrollStateChanged(int arg0) {
+			}
+		});
+	}
+
+	@Override
+	public void onTabReselected(Tab arg0, FragmentTransaction arg1) {
+		// TODO Auto-generated method stub
 
 	}
 
-	// class for the tab listener
-	private static class TabListener implements ActionBar.TabListener {
+	@Override
+	public void onTabSelected(Tab tab, FragmentTransaction arg1) {
+		// TODO Auto-generated method stub
 
-		Fragment fragment;
+		// on tab selected
+		// show respected fragment view
+		viewPager.setCurrentItem(tab.getPosition());
+	}
 
-		public TabListener(Fragment fragment) {
-			// TODO Auto-generated constructor stub
-			this.fragment = fragment;
+	@Override
+	public void onTabUnselected(Tab arg0, FragmentTransaction arg1) {
+		// TODO Auto-generated method stub
+
+	}
+
+	private static class TabsPagerAdapter extends FragmentPagerAdapter {
+
+		public TabsPagerAdapter(FragmentManager fm) {
+			super(fm);
 		}
 
 		@Override
-		public void onTabReselected(android.support.v7.app.ActionBar.Tab tab,
-				FragmentTransaction ft) {
-			// TODO Auto-generated method stub
-			ft.replace(R.id.fragment_container, fragment);
+		public Fragment getItem(int index) {
 
+			switch (index) {
+			case 0:
+				// All Events Fragment
+				return new AllEventsFragment();
+			case 1:
+				// My Events Fragment
+				return new MyEventsFragment();
+
+			}
+
+			return null;
 		}
 
 		@Override
-		public void onTabSelected(android.support.v7.app.ActionBar.Tab tab,
-				FragmentTransaction ft) {
-			// TODO Auto-generated method stub
-			ft.remove(fragment);
-
-		}
-
-		@Override
-		public void onTabUnselected(android.support.v7.app.ActionBar.Tab tab,
-				FragmentTransaction ft) {
-			// TODO Auto-generated method stub
-
+		public int getCount() {
+			// get item count - equal to number of tabs
+			return 2;
 		}
 
 	}
