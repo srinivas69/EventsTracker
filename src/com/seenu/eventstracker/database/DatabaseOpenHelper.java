@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
@@ -18,8 +19,9 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
 	private static final int DATABASE_VERSION = 1;
 
 	private static final String TABLE_NAME = "Events";
+	private static final String TABLE_NAME_USERS = "User";
 
-	// columns of the database
+	// columns of the Events table
 	public static final String COLUMN_ID = "_id";
 	public static final String COLUMN_NAME = "name";
 	public static final String COLUMN_LOCATION = "location";
@@ -27,6 +29,16 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
 	public static final String COLUMN_IMAGE_URL = "image_url";
 	public static final String COLUMN_DATE = "date";
 	public static final String COLUMN_TIME = "time";
+
+	// columns of the Users table
+	public static final String COLUMN_USER_ID = "_id";
+	public static final String COLUMN_USER_EVENT_ID = "event_id";
+	public static final String COLUMN_USER_NAME = "name";
+	public static final String COLUMN_USER_LOCATION = "location";
+	public static final String COLUMN_USER_ENTRY_TYPE = "entry_type";
+	public static final String COLUMN_USER_IMAGE_URL = "image_url";
+	public static final String COLUMN_USER_DATE = "date";
+	public static final String COLUMN_USER_TIME = "time";
 
 	private final Context context;
 	private SQLiteDatabase database;
@@ -133,8 +145,8 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
 		super.close();
 	}
 
-	// retrieves a particular user
-	public Cursor getUser(long rowId) throws SQLException {
+	// retrieves a particular event
+	public Cursor getEvent(long rowId) throws SQLException {
 		Cursor mCursor = database.query(true, TABLE_NAME, new String[] {
 				COLUMN_ID, COLUMN_NAME, COLUMN_LOCATION, COLUMN_ENTRY_TYPE,
 				COLUMN_IMAGE_URL, COLUMN_DATE, COLUMN_TIME }, COLUMN_ID + " = "
@@ -146,12 +158,43 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
 		return mCursor;
 	}
 
-	// retrieves all users
-	public Cursor getAllUsers() {
+	// retrieves all events
+	public Cursor getAllEvents() {
 		return database.query(TABLE_NAME, new String[] { COLUMN_ID,
 				COLUMN_NAME, COLUMN_LOCATION, COLUMN_ENTRY_TYPE,
 				COLUMN_IMAGE_URL, COLUMN_DATE, COLUMN_TIME }, null, null, null,
 				null, null);
+	}
+
+	// insert event of User into the database
+	public long insertUserEvent(String event_id, String name, String location,
+			String entry_type, String image_url, String date, String time) {
+		ContentValues initialValues = new ContentValues();
+		initialValues.put(COLUMN_USER_EVENT_ID, event_id);
+		initialValues.put(COLUMN_USER_NAME, name);
+		initialValues.put(COLUMN_USER_LOCATION, location);
+		initialValues.put(COLUMN_USER_ENTRY_TYPE, entry_type);
+		initialValues.put(COLUMN_USER_IMAGE_URL, image_url);
+		initialValues.put(COLUMN_USER_DATE, date);
+		initialValues.put(COLUMN_USER_TIME, time);
+		return database.insert(TABLE_NAME_USERS, null, initialValues);
+	}
+
+	// retrieves all events of user
+	public Cursor getAllUserEvents() {
+		return database.query(TABLE_NAME_USERS, new String[] { COLUMN_USER_ID,
+				COLUMN_USER_EVENT_ID, COLUMN_USER_NAME, COLUMN_USER_LOCATION,
+				COLUMN_USER_ENTRY_TYPE, COLUMN_USER_IMAGE_URL,
+				COLUMN_USER_DATE, COLUMN_USER_TIME }, null, null, null, null,
+				null);
+	}
+
+	// deletes all the records of the events
+	public void deleteAllUserEvents() {
+		// TODO Auto-generated method stub
+		// database.delete(TABLE_NAME_USERS, null, null);
+
+		database.execSQL("delete from " + TABLE_NAME_USERS);
 	}
 
 	@Override

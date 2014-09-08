@@ -5,7 +5,7 @@
     android:background="@drawable/lv_items_bg" >
 
     <ImageView
-        android:id="@+id/imageView1"
+        android:id="@+id/eveDateImg"
         android:layout_width="75dp"
         android:layout_height="75dp"
         android:layout_alignParentLeft="true"
@@ -14,21 +14,21 @@
         android:src="@drawable/ic_launcher" />
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/eveDateTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/imageView1"
+        android:layout_alignTop="@+id/eveDateImg"
         android:layout_marginLeft="10dp"
-        android:layout_toRightOf="@+id/imageView1"
+        android:layout_toRightOf="@+id/eveDateImg"
         android:text="Date"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textColor="@android:color/secondary_text_light" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/eveTypTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/imageView1"
+        android:layout_alignBottom="@+id/eveDateImg"
         android:layout_alignParentRight="true"
         android:layout_marginRight="10dp"
         android:text="free"
@@ -36,11 +36,11 @@
         android:textColor="@color/event_type_color" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/eveTimTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView1"
-        android:layout_below="@+id/textView1"
+        android:layout_alignLeft="@+id/eveDateTv"
+        android:layout_below="@+id/eveDateTv"
         android:text="Time"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textColor="@android:color/secondary_text_light" />

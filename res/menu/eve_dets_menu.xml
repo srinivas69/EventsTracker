@@ -3,9 +3,15 @@
 
     <item
         android:id="@+id/favs_menu"
-        android:orderInCategory="100"
+        android:orderInCategory="99"
         android:showAsAction="never"
         android:title="Favourites">
+    </item>
+    <item
+        android:id="@+id/logout_menu"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="Logout">
     </item>
 
 </menu>
