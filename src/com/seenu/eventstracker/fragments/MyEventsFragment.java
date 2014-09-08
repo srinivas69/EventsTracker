@@ -1,15 +1,19 @@
 package com.seenu.eventstracker.fragments;
 
+import com.seenu.eventstracker.EventDetailsActivity;
 import com.seenu.eventstracker.R;
 import com.seenu.eventstracker.R.layout;
 import com.seenu.eventstracker.adapters.EventsListAdapter;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.AdapterView.OnItemClickListener;
 
 public class MyEventsFragment extends Fragment {
 
@@ -39,6 +43,20 @@ public class MyEventsFragment extends Fragment {
 		// initializing the listview adapter
 		adapter = new EventsListAdapter(getActivity());
 		lv.setAdapter(adapter);
+
+		// listview item click listener
+		lv.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+					long arg3) {
+				// TODO Auto-generated method stub
+
+				// starting Event Details Activity with Intent
+				Intent i = new Intent(getActivity(), EventDetailsActivity.class);
+				startActivity(i);
+			}
+		});
 	}
 
 }

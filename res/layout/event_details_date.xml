@@ -6,8 +6,8 @@
 
     <ImageView
         android:id="@+id/imageView1"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
         android:background="@android:color/black"
@@ -20,19 +20,7 @@
         android:layout_alignTop="@+id/imageView1"
         android:layout_marginLeft="10dp"
         android:layout_toRightOf="@+id/imageView1"
-        android:maxLines="2"
-        android:text="Event Name...Event Name...Event Name...Event Name...Event Name...Event Name...Event Name...Event Name"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="@android:color/primary_text_light" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView1"
-        android:layout_below="@+id/textView1"
-        android:maxLines="1"
-        android:text="Event Location"
+        android:text="Date"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textColor="@android:color/secondary_text_light" />
 
@@ -41,20 +29,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/imageView1"
-        android:layout_alignLeft="@+id/textView2"
-        android:text="Event Date"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textColor="@android:color/secondary_text_light" />
-
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/textView3"
         android:layout_alignParentRight="true"
         android:layout_marginRight="10dp"
         android:text="free"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textColor="@color/event_type_color" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView1"
+        android:layout_below="@+id/textView1"
+        android:text="Time"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="@android:color/secondary_text_light" />
 
 </RelativeLayout>

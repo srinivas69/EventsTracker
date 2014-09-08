@@ -2,5 +2,6 @@
 <resources>
 
     <color name="event_type_color">#138b54</color>
+    <color name="lv_items_stroke">#d4d0c5</color>
 
 </resources>
