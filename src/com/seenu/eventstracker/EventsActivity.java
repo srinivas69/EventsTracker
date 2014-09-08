@@ -22,34 +22,44 @@ public class EventsActivity extends ActionBarActivity implements
 	private ActionBar actionBar;
 
 	// Tab titles
-	private String[] tabs = { "All", "My Events" };
+	private String[] tabs = { "All", "Favourites" };
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.events_activity);
 
+		// Bundle for receiving the data from the previous activity.
+		Bundle b = getIntent().getExtras();
+
 		// Initilization
 		viewPager = (ViewPager) findViewById(R.id.pager);
+
 		actionBar = getSupportActionBar();
 		actionBar.setTitle("Events");
-		mAdapter = new TabsPagerAdapter(getSupportFragmentManager());
-
-		viewPager.setAdapter(mAdapter);
 		actionBar.setHomeButtonEnabled(false);
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+
+		mAdapter = new TabsPagerAdapter(getSupportFragmentManager());
+		viewPager.setAdapter(mAdapter);
+
+		// perform check if bundle contains key called TAB_NUMBER
+		if (b.containsKey("TAB_NUMBER")) {
+			System.out.println(b.containsKey("TAB_NUMBER"));
+			viewPager.setCurrentItem(1);
+		} else if (b.containsKey("NAME")) {
+			String name = b.getString("NAME");
+			viewPager.setCurrentItem(0);
+
+			Toast.makeText(EventsActivity.this, "Welcome!" + name,
+					Toast.LENGTH_SHORT).show();
+		}
 
 		// Adding Tabs
 		for (String tab_name : tabs) {
 			actionBar.addTab(actionBar.newTab().setText(tab_name)
 					.setTabListener(this));
 		}
-
-		Bundle b = getIntent().getExtras();
-		String name = b.getString("NAME");
-
-		Toast.makeText(EventsActivity.this, "Welcome!" + name,
-				Toast.LENGTH_SHORT).show();
 
 		// on swiping the viewpager make respective tab selected
 		viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -112,6 +122,12 @@ public class EventsActivity extends ActionBarActivity implements
 			}
 
 			return null;
+		}
+
+		@Override
+		public int getItemPosition(Object object) {
+			// TODO Auto-generated method stub
+			return super.getItemPosition(object);
 		}
 
 		@Override

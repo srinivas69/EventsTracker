@@ -3,6 +3,8 @@ package com.seenu.eventstracker.adapters;
 import com.seenu.eventstracker.R;
 
 import android.content.Context;
+import android.database.Cursor;
+import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
