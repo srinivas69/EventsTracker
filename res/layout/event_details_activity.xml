@@ -52,7 +52,7 @@
                 android:layout_below="@+id/include1"
                 android:layout_marginTop="5dp"
                 android:layout_toRightOf="@+id/view1"
-                android:text="favourite" />
+                android:text="Favourite" />
 
             <include
                 android:id="@+id/include1"

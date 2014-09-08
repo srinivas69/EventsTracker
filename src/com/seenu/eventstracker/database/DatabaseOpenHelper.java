@@ -197,6 +197,12 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
 		database.execSQL("delete from " + TABLE_NAME_USERS);
 	}
 
+	// deleate a recornd from user events
+	public void deleteUserEvent(String id) {
+		// TODO Auto-generated method stub
+		database.delete(TABLE_NAME_USERS, id + "=" + COLUMN_USER_EVENT_ID, null);
+	}
+
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 		// TODO Auto-generated method stub

@@ -8,6 +8,7 @@ import com.seenu.eventstracker.R.layout;
 import com.seenu.eventstracker.adapters.AllEventsAdapter;
 import com.seenu.eventstracker.adapters.EventsListAdapter;
 import com.seenu.eventstracker.database.DatabaseOpenHelper;
+import com.seenu.eventstracker.pojo.EventsPOJOClass;
 
 import android.content.Intent;
 import android.database.Cursor;
@@ -80,12 +81,34 @@ public class MyEventsFragment extends Fragment {
 		lv.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
-			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+			public void onItemClick(AdapterView<?> arg0, View arg1, int pos,
 					long arg3) {
 				// TODO Auto-generated method stub
 
+				cursor.moveToPosition(pos);
+				String id = cursor.getString(cursor
+						.getColumnIndex(DatabaseOpenHelper.COLUMN_ID));
+				String event = cursor.getString(cursor
+						.getColumnIndex(DatabaseOpenHelper.COLUMN_NAME));
+				String location = cursor.getString(cursor
+						.getColumnIndex(DatabaseOpenHelper.COLUMN_LOCATION));
+				String date = cursor.getString(cursor
+						.getColumnIndex(DatabaseOpenHelper.COLUMN_DATE));
+				String time = cursor.getString(cursor
+						.getColumnIndex(DatabaseOpenHelper.COLUMN_TIME));
+				String eventType = cursor.getString(cursor
+						.getColumnIndex(DatabaseOpenHelper.COLUMN_ENTRY_TYPE));
+				String url = cursor.getString(cursor
+						.getColumnIndex(DatabaseOpenHelper.COLUMN_IMAGE_URL));
+
+				// creating an object with the Event values
+				EventsPOJOClass obj = new EventsPOJOClass(id, event, location,
+						eventType, date, time, url);
+
 				// starting Event Details Activity with Intent
 				Intent i = new Intent(getActivity(), EventDetailsActivity.class);
+				i.putExtra("EVENTS_OBJ", obj);
+				i.putExtra("FAVOURITE", "1");
 				startActivity(i);
 			}
 		});

@@ -43,6 +43,8 @@ public class EventDetailsActivity extends ActionBarActivity {
 
 	private DatabaseOpenHelper myDbHelper;
 
+	private int frag_num;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -64,8 +66,10 @@ public class EventDetailsActivity extends ActionBarActivity {
 		eveTypeTv = (TextView) findViewById(R.id.eveTypTv);
 		favsBt = (Button) findViewById(R.id.button1);
 
-		if (b != null)
+		if (b != null) {
 			obj = (EventsPOJOClass) b.get("EVENTS_OBJ");
+			frag_num = Integer.parseInt(b.getString("FAVOURITE"));
+		}
 
 		try {
 			// check if database exists in app path, if not copy it from assets
@@ -99,18 +103,40 @@ public class EventDetailsActivity extends ActionBarActivity {
 		UrlImageViewHelper.setUrlDrawable(eveThumbIv, url,
 				R.drawable.ic_launcher);
 
-		favsBt.setOnClickListener(new OnClickListener() {
+		// Disabling the Favourites button when the event is in users list
+		if (frag_num == 1) {
+			favsBt.setText("Unmark as favourite");
 
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
+			favsBt.setOnClickListener(new OnClickListener() {
 
-				myDbHelper.insertUserEvent(id, event, location, eventType, url,
-						date, time);
-				Toast.makeText(EventDetailsActivity.this,
-						"Marked event as favourite", Toast.LENGTH_SHORT).show();
-			}
-		});
+				@Override
+				public void onClick(View v) {
+					// TODO Auto-generated method stub
+
+					myDbHelper.deleteUserEvent(id);
+					favsBt.setText("Mark as favourite");
+					Toast.makeText(EventDetailsActivity.this,
+							"Unmarked from favourites", Toast.LENGTH_SHORT)
+							.show();
+				}
+			});
+		} else if (frag_num == 0) {
+			favsBt.setText("Mark as favourite");
+
+			favsBt.setOnClickListener(new OnClickListener() {
+
+				@Override
+				public void onClick(View v) {
+					// TODO Auto-generated method stub
+
+					myDbHelper.insertUserEvent(id, event, location, eventType,
+							url, date, time);
+					favsBt.setText("Unmark as favourite");
+					Toast.makeText(EventDetailsActivity.this,
+							"Marked as favourite", Toast.LENGTH_SHORT).show();
+				}
+			});
+		}
 
 	}
 
