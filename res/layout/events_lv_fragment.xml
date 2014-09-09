@@ -15,4 +15,14 @@
         android:paddingTop="5dp" >
     </ListView>
 
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:text="You have not added any items to favourites"
+        android:textColor="@android:color/tertiary_text_light"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
 </RelativeLayout>

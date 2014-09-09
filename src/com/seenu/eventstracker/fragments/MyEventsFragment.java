@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
 
 public class MyEventsFragment extends Fragment {
@@ -27,6 +28,9 @@ public class MyEventsFragment extends Fragment {
 	// listview widget & adapter
 	private ListView lv;
 	private AllEventsAdapter adapter;
+
+	// Empty list Textview
+	private TextView emptyListTv;
 
 	// instance of DatabaseOpenHelper class
 	private DatabaseOpenHelper myDbHelper;
@@ -43,6 +47,7 @@ public class MyEventsFragment extends Fragment {
 		view = inflater.inflate(R.layout.events_lv_fragment, null);
 
 		lv = (ListView) view.findViewById(R.id.listView1);
+		emptyListTv = (TextView) view.findViewById(R.id.textView1);
 		return view;
 	}
 
@@ -70,6 +75,8 @@ public class MyEventsFragment extends Fragment {
 
 		fetchAllUserEvents();
 
+		lv.setEmptyView(emptyListTv);
+
 		// listview item click listener
 		lv.setOnItemClickListener(new OnItemClickListener() {
 
@@ -80,7 +87,7 @@ public class MyEventsFragment extends Fragment {
 
 				cursor.moveToPosition(pos);
 				String id = cursor.getString(cursor
-						.getColumnIndex(DatabaseOpenHelper.COLUMN_ID));
+						.getColumnIndex(DatabaseOpenHelper.COLUMN_USER_EVENT_ID));
 				String event = cursor.getString(cursor
 						.getColumnIndex(DatabaseOpenHelper.COLUMN_NAME));
 				String location = cursor.getString(cursor

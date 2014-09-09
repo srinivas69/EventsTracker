@@ -21,6 +21,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
+import android.widget.TextView;
 
 public class AllEventsFragment extends Fragment {
 
@@ -29,6 +30,9 @@ public class AllEventsFragment extends Fragment {
 	// listview widget & adapter
 	private ListView lv;
 	private AllEventsAdapter adapter;
+
+	// Empty list Textview
+	private TextView emptyListTv;
 
 	// instance of DatabaseOpenHelper class
 	private DatabaseOpenHelper myDbHelper;
@@ -45,6 +49,7 @@ public class AllEventsFragment extends Fragment {
 		view = inflater.inflate(R.layout.events_lv_fragment, null);
 
 		lv = (ListView) view.findViewById(R.id.listView1);
+		emptyListTv = (TextView) view.findViewById(R.id.textView1);
 		return view;
 	}
 
@@ -102,6 +107,7 @@ public class AllEventsFragment extends Fragment {
 		// initializing the listview adapterDatabaseOpenHelper
 		adapter = new AllEventsAdapter(getActivity(), cursor, 0);
 		lv.setAdapter(adapter);
+		lv.setEmptyView(emptyListTv);
 
 		// listview item click listener
 		lv.setOnItemClickListener(new OnItemClickListener() {
