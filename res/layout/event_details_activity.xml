@@ -90,7 +90,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentTop="true"
-                    android:text="event description goes here. event description goes here."
+                    android:text="No description available!"
                     android:textAppearance="?android:attr/textAppearanceSmall" />
 
                 <View
@@ -150,6 +150,13 @@
                     android:layout_alignParentLeft="true"
                     android:layout_below="@+id/textView6"
                     android:background="@android:color/black" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="Map not available!"
+                        android:textColor="@android:color/white" />
                 </FrameLayout>
 
                 <View

@@ -87,7 +87,7 @@ public class EventsActivity extends ActionBarActivity implements
 				String name = b.getString("NAME");
 				viewPager.setCurrentItem(0);
 
-				Toast.makeText(EventsActivity.this, "Welcome!" + name,
+				Toast.makeText(EventsActivity.this, "Welcome! " + name,
 						Toast.LENGTH_SHORT).show();
 			}
 		}
@@ -137,7 +137,7 @@ public class EventsActivity extends ActionBarActivity implements
 		// TODO Auto-generated method stub
 
 		switch (item.getItemId()) {
-
+		
 		case R.id.action_logout:
 
 			// deleting all the fields of uesr events for the User table.

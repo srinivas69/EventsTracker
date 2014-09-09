@@ -31,14 +31,7 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
 	public static final String COLUMN_TIME = "time";
 
 	// columns of the Users table
-	//public static final String COLUMN_USER_ID = "_id";
 	public static final String COLUMN_USER_EVENT_ID = "event_id";
-	/*public static final String COLUMN_USER_NAME = "name";
-	public static final String COLUMN_USER_LOCATION = "location";
-	public static final String COLUMN_USER_ENTRY_TYPE = "entry_type";
-	public static final String COLUMN_USER_IMAGE_URL = "image_url";
-	public static final String COLUMN_USER_DATE = "date";
-	public static final String COLUMN_USER_TIME = "time";*/
 
 	private final Context context;
 	private SQLiteDatabase database;
@@ -182,10 +175,10 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
 
 	// retrieves all events of user
 	public Cursor getAllUserEvents() {
-		return database.query(TABLE_NAME_USERS, new String[] { COLUMN_ID,
-				COLUMN_USER_EVENT_ID, COLUMN_NAME, COLUMN_LOCATION,
-				COLUMN_ENTRY_TYPE, COLUMN_IMAGE_URL,
-				COLUMN_DATE, COLUMN_TIME }, null, null, null, null,
+		return database.query(TABLE_NAME_USERS,
+				new String[] { COLUMN_ID, COLUMN_USER_EVENT_ID, COLUMN_NAME,
+						COLUMN_LOCATION, COLUMN_ENTRY_TYPE, COLUMN_IMAGE_URL,
+						COLUMN_DATE, COLUMN_TIME }, null, null, null, null,
 				null);
 	}
 

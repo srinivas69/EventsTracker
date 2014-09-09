@@ -160,9 +160,10 @@ public class EventDetailsActivity extends ActionBarActivity {
 		// TODO Auto-generated method stub
 		super.onBackPressed();
 
+		// launch previous activity called EventDetailsActivity
 		Intent i = new Intent(EventDetailsActivity.this, EventsActivity.class);
 		startActivity(i);
-		// setResult(RESULT_OK);
+		finish();
 	}
 
 	@Override
@@ -183,6 +184,7 @@ public class EventDetailsActivity extends ActionBarActivity {
 					EventsActivity.class);
 			i.putExtra("TAB_NUMBER", 1);
 			startActivity(i);
+			finish();
 			break;
 
 		case R.id.logout_menu:
