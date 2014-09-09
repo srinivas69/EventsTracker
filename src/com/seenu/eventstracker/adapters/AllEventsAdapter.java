@@ -47,15 +47,6 @@ public class AllEventsAdapter extends CursorAdapter {
 		UrlImageViewHelper.setUrlDrawable(holder.imageThumbnail, url,
 				R.drawable.ic_launcher);
 
-		holder.deleteImg.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				System.out.println("clicked");
-			}
-		});
-
 	}
 
 	@Override
@@ -68,13 +59,12 @@ public class AllEventsAdapter extends CursorAdapter {
 
 		// initialization
 		holder.imageThumbnail = (ImageView) view.findViewById(R.id.imageView1);
-		holder.deleteImg = (ImageView) view.findViewById(R.id.imageView2);
 		holder.nameText = (TextView) view.findViewById(R.id.textView1);
 		holder.locText = (TextView) view.findViewById(R.id.textView2);
 		holder.dateText = (TextView) view.findViewById(R.id.textView3);
 		holder.eveTypText = (TextView) view.findViewById(R.id.textView4);
 
-		holder.deleteImg.setVisibility(View.INVISIBLE);
+		// holder.deleteImg.setVisibility(View.INVISIBLE);
 
 		view.setTag(holder);
 
@@ -84,7 +74,6 @@ public class AllEventsAdapter extends CursorAdapter {
 	private static class ViewHolder {
 
 		private ImageView imageThumbnail;
-		private ImageView deleteImg;
 		private TextView nameText;
 		private TextView locText;
 		private TextView dateText;

@@ -44,15 +44,18 @@ public class EventsActivity extends ActionBarActivity implements
 		viewPager.setAdapter(mAdapter);
 
 		// perform check if bundle contains key called TAB_NUMBER
-		if (b.containsKey("TAB_NUMBER")) {
-			System.out.println(b.containsKey("TAB_NUMBER"));
-			viewPager.setCurrentItem(1);
-		} else if (b.containsKey("NAME")) {
-			String name = b.getString("NAME");
-			viewPager.setCurrentItem(0);
 
-			Toast.makeText(EventsActivity.this, "Welcome!" + name,
-					Toast.LENGTH_SHORT).show();
+		if (b != null) {
+			if (b.containsKey("TAB_NUMBER")) {
+				System.out.println(b.containsKey("TAB_NUMBER"));
+				viewPager.setCurrentItem(1);
+			} else if (b.containsKey("NAME")) {
+				String name = b.getString("NAME");
+				viewPager.setCurrentItem(0);
+
+				Toast.makeText(EventsActivity.this, "Welcome!" + name,
+						Toast.LENGTH_SHORT).show();
+			}
 		}
 
 		// Adding Tabs

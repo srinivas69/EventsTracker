@@ -141,6 +141,23 @@ public class EventDetailsActivity extends ActionBarActivity {
 	}
 
 	@Override
+	protected void onDestroy() {
+		// TODO Auto-generated method stub
+		super.onDestroy();
+		myDbHelper.close();
+	}
+
+	@Override
+	public void onBackPressed() {
+		// TODO Auto-generated method stub
+		super.onBackPressed();
+		
+		Intent i = new Intent(EventDetailsActivity.this,EventsActivity.class);
+		startActivity(i);
+		//setResult(RESULT_OK);
+	}
+
+	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// TODO Auto-generated method stub
 		getMenuInflater().inflate(R.menu.eve_dets_menu, menu);

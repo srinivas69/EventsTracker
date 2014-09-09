@@ -4,9 +4,7 @@ import java.io.IOException;
 
 import com.seenu.eventstracker.EventDetailsActivity;
 import com.seenu.eventstracker.R;
-import com.seenu.eventstracker.R.layout;
 import com.seenu.eventstracker.adapters.AllEventsAdapter;
-import com.seenu.eventstracker.adapters.EventsListAdapter;
 import com.seenu.eventstracker.database.DatabaseOpenHelper;
 import com.seenu.eventstracker.pojo.EventsPOJOClass;
 
@@ -32,6 +30,9 @@ public class MyEventsFragment extends Fragment {
 
 	// instance of DatabaseOpenHelper class
 	private DatabaseOpenHelper myDbHelper;
+
+	// cursor for user events
+	private Cursor cursor;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -67,15 +68,7 @@ public class MyEventsFragment extends Fragment {
 			throw sqle;
 		}
 
-		// fetch all user events
-		final Cursor cursor = myDbHelper.getAllUserEvents();
-
-		if (cursor.getCount() != 0) {
-			// initializing the listview adapter
-			cursor.moveToFirst();
-			adapter = new AllEventsAdapter(getActivity(), cursor, 0);
-			lv.setAdapter(adapter);
-		}
+		fetchAllUserEvents();
 
 		// listview item click listener
 		lv.setOnItemClickListener(new OnItemClickListener() {
@@ -110,7 +103,30 @@ public class MyEventsFragment extends Fragment {
 				i.putExtra("EVENTS_OBJ", obj);
 				i.putExtra("FAVOURITE", "1");
 				startActivity(i);
+				getActivity().finish();
 			}
 		});
 	}
+
+	@Override
+	public void onDestroy() {
+		// TODO Auto-generated method stub
+		super.onDestroy();
+		myDbHelper.close();
+	}
+
+	private void fetchAllUserEvents() {
+		// TODO Auto-generated method stub
+
+		// fetch all user events
+		cursor = myDbHelper.getAllUserEvents();
+
+		if (cursor.getCount() != 0) {
+			// initializing the listview adapter
+			cursor.moveToFirst();
+			adapter = new AllEventsAdapter(getActivity(), cursor, 0);
+			lv.setAdapter(adapter);
+		}
+	}
+
 }

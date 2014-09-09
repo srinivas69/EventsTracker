@@ -43,29 +43,18 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/imageView1"
         android:layout_alignLeft="@+id/textView2"
-        android:text="Event Date"
         android:layout_marginBottom="1dp"
+        android:text="Event Date"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textColor="@android:color/secondary_text_light" />
-
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignTop="@+id/textView4"
-        android:layout_marginRight="10dp"
-        android:padding="1dp"
-        android:src="@drawable/trash" />
 
     <TextView
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/textView3"
-        android:layout_alignBottom="@+id/textView3"
-        android:layout_marginRight="10dp"
-        android:layout_toLeftOf="@+id/imageView2"
+        android:layout_alignBottom="@+id/imageView1"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="15dp"
         android:text="free"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textColor="@color/event_type_color" />

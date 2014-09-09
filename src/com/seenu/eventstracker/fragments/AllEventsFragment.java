@@ -6,9 +6,7 @@ import java.util.Iterator;
 
 import com.seenu.eventstracker.EventDetailsActivity;
 import com.seenu.eventstracker.R;
-import com.seenu.eventstracker.R.layout;
 import com.seenu.eventstracker.adapters.AllEventsAdapter;
-import com.seenu.eventstracker.adapters.EventsListAdapter;
 import com.seenu.eventstracker.database.DatabaseOpenHelper;
 import com.seenu.eventstracker.pojo.EventsPOJOClass;
 
@@ -85,20 +83,20 @@ public class AllEventsFragment extends Fragment {
 
 			cursorUserEvents.moveToFirst();
 
-			usrEvtIds.add(cursorUserEvents.getString(cursorUserEvents
-					.getColumnIndex(DatabaseOpenHelper.COLUMN_USER_EVENT_ID)));
+			String id1 = cursorUserEvents.getString(cursorUserEvents
+					.getColumnIndex(DatabaseOpenHelper.COLUMN_USER_EVENT_ID));
+			usrEvtIds.add(id1);
 
 			while (cursorUserEvents.moveToNext()) {
 
-				usrEvtIds
-						.add(cursorUserEvents.getString(cursorUserEvents
-								.getColumnIndex(DatabaseOpenHelper.COLUMN_USER_EVENT_ID)));
+				String id2 = cursorUserEvents
+						.getString(cursorUserEvents
+								.getColumnIndex(DatabaseOpenHelper.COLUMN_USER_EVENT_ID));
+
+				usrEvtIds.add(id2);
 
 			}
-			/*
-			 * System.out.println(usrEvtIds.size() + usrEvtIds.get(0) +
-			 * usrEvtIds.get(1) + usrEvtIds.get(2));
-			 */
+
 		}
 
 		// initializing the listview adapterDatabaseOpenHelper
@@ -114,6 +112,7 @@ public class AllEventsFragment extends Fragment {
 				// TODO Auto-generated method stub
 
 				String favValue = "0";
+				String position = String.valueOf(pos + 1);
 
 				cursor.moveToPosition(pos);
 				String id = cursor.getString(cursor
@@ -139,18 +138,28 @@ public class AllEventsFragment extends Fragment {
 
 				while (eventIdItr.hasNext()) {
 					String eventId = (String) eventIdItr.next();
-					if (String.valueOf(pos).equals(eventId))
-						// System.out.println("Matched");
+					if (position.equals(eventId)) {
 						favValue = "1";
+					}
 				}
 
 				// starting Event Details Activity with Intent
 				Intent i = new Intent(getActivity(), EventDetailsActivity.class);
 				i.putExtra("EVENTS_OBJ", obj);
 				i.putExtra("FAVOURITE", favValue);
-				System.out.println("FAVOURITE " + favValue);
 				startActivity(i);
+				getActivity().finish();
 			}
 		});
 	}
+
+	@Override
+	public void onDestroy() {
+		// TODO Auto-generated method stub
+		super.onDestroy();
+
+		// closing the databse
+		myDbHelper.close();
+	}
+
 }
