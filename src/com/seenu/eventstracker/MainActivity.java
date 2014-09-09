@@ -22,7 +22,10 @@ public class MainActivity extends ActionBarActivity {
 	// Edittext Widget for User Name
 	private EditText nameEt;
 
-	// Button Widget for Skip
+	/*
+	 * Button Widget to skip entering the name.Currently kept this button as
+	 * invisible.
+	 */
 	private Button skipBt;
 
 	// user name
